@@ -1,10 +1,78 @@
 form {
 	display: flex;
 	flex-flow: row wrap;
-	align-items: center;
-	justify-content: center;
-	gap: 10px;
+	justify-content: flex-start;
 	padding: 0 24px;
 	outline: 1px solid black;
 	border-radius: 10px;
+	width: calc(100% + 16px);
+	box-sizing: border-box;
+}
+
+.field {
+	display: flex;
+	flex-flow: column;
+	padding: 8px;
+	box-sizing: border-box;
+}
+
+.c1 {
+	flex-grow: 0;
+	max-width: 8.3333%;
+	flex-basis: 8.3333%;
+}
+.c2 {
+	flex-grow: 0;
+	max-width: 16.6666%;
+	flex-basis: 16.6666%;
+}
+.c3 {
+	flex-grow: 0;
+	max-width: 25%;
+	flex-basis: 25%;
+}
+.c4 {
+	flex-grow: 0;
+	max-width: 33.3333%;
+	flex-basis: 33.3333%;
+}
+.c5 {
+	flex-grow: 0;
+	max-width: 41.6666%;
+	flex-basis: 41.6666%;
+}
+.c6 {
+	flex-grow: 0;
+	max-width: 50%;
+	flex-basis: 50%;
+}
+.c7 {
+	flex-grow: 0;
+	max-width: 58.3333%;
+	flex-basis: 58.3333%;
+}
+.c8 {
+	flex-grow: 0;
+	max-width: 66.6666%;
+	flex-basis: 66.6666%;
+}
+.c9 {
+	flex-grow: 0;
+	max-width: 75%;
+	flex-basis: 75%;
+}
+.c10 {
+	flex-grow: 0;
+	max-width: 83.3333%;
+	flex-basis: 83.3333%;
+}
+.c11 {
+	flex-grow: 0;
+	max-width: 91.6666%;
+	flex-basis: 91.6666%;
+}
+.c12 {
+	flex-grow: 0;
+	max-width: 100%;
+	flex-basis: 100%;
 }
