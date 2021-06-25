@@ -1,3 +1,5 @@
+let assert = require('assert');
+
 /**
  * Checks the LISP string to see if all parentheses are properly closed and nested
  * @param {string} lispStr - input string of list code
@@ -19,10 +21,13 @@ function checkParentheses(lispStr) {
    return count === 0;
 }
 
-console.log(checkParentheses(''));
-console.log(checkParentheses('()'));
-console.log(checkParentheses('())'));
-console.log(checkParentheses('())('));
-console.log(checkParentheses('(a)'));
-console.log(checkParentheses('(a('));
-console.log(checkParentheses('((())())'));
+/**
+ * Test cases
+ */
+// assert(checkParentheses(''), 'Expected empty string to return true.')
+// assert(checkParentheses('()'), 'Expected "()" to return true.');
+// assert(!checkParentheses('())'), 'Expected "())" to return false.');
+// assert(!checkParentheses('())('), 'Expected "())(" to return false.');
+// assert(checkParentheses('(a)'), 'Expected "(a)" to return true.');
+// assert(!checkParentheses('(a('), 'Expected "(a(" to return false.');
+// assert(checkParentheses('((())())'), 'Expected "((())())" to return true.');
