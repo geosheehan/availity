@@ -1,0 +1,20 @@
+.field {
+	display: flex;
+	flex-flow: column;
+	margin: 0 auto 15px auto;
+}
+
+textarea {
+	border: none;
+	outline: 1px solid darkgray;
+	border-radius: 4px;
+	font-size: 1.05em;
+}
+
+input {
+	height: 2em;
+	font-size: 1.05em;
+	border: none;
+	outline: 1px solid darkgray;
+	border-radius: 4px;
+}
