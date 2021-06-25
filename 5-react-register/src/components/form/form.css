@@ -1,0 +1,10 @@
+form {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 0 24px;
+	outline: 1px solid black;
+	border-radius: 10px;
+}
