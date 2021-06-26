@@ -11,7 +11,6 @@ function App() {
   const [name, setName] = useState({first: '', last: ''});
   const [contact, setContact] = useState({phone: '', email: ''});
   const [npi, setNPI] = useState('');
-
   const [address, setAddress] = useState({
     street: '',
     extended: '',
@@ -20,6 +19,7 @@ function App() {
     zip: ''
   })
 
+  // Error states
   const [errors, setErrors] = useState({
     // errors will be empty if there are no errors.
     // Otherwise, a key to the field with a list of error messages will appear
@@ -34,12 +34,14 @@ function App() {
     // zip: '',
   })
 
+  // Show the submit message next to the submit button
   const [showSubmit, setShowSubmit] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const {submit, ...others} = errors;
+    // Wait for this error to be set before continuing, otherwise additional submit clicks will be required.
     await setErrors(others);
     if (Object.keys(errors).length) return setErrors({...errors, submit: 'Please handle all form errors and submit again.'});
 
@@ -62,6 +64,7 @@ function App() {
 
   }
 
+  // Generic validators
   const validateFilled = (e, key, field) => {
     const msg = `${field} cannot be blank.`;
 
@@ -83,6 +86,7 @@ function App() {
     return true;
   }
 
+  // Specific validators
   const validateZipCode = (e, key) => {
     validatePattern(e, key, 'Zip Code', /^\d{5}(?:[-\s]\d{4})?$/);
   }
@@ -246,7 +250,12 @@ function App() {
         />
 
         <button type="submit" col={4}>Sign Up</button>
-        <span className={errors.submit ? 'error--text' : showSubmit ? '' : 'hide'} col={8}>{errors.submit || 'Check console to see submitted data.'}</span>
+        <span
+          className={errors.submit ? 'error--text' : showSubmit ? '' : 'hide'}
+          col={8}
+        >
+          {errors.submit || 'Check console to see submitted data.'}
+        </span>
       </Form>
     </Container>
   );
