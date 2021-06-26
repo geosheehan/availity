@@ -13,3 +13,25 @@ input {
 	outline: 1px solid darkgray;
 	border-radius: 4px;
 }
+
+textarea.error,
+input.error {
+	outline: 1px solid red;
+}
+
+textarea.selected,
+input.selected {
+	outline: 2px solid var(--accent);
+}
+
+.error.selected {
+	outline: 2px solid red;
+}
+
+.selected--text {
+	color: var(--accent);
+}
+
+.error--text {
+	color: red;
+}

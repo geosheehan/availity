@@ -1,16 +1,31 @@
-import './field.css'
 
-const Field = ({label, type, id, rows}) => {
+import { useState } from 'react';
+import './field.css';
+
+const Field = ({label, type, id, rows, error, helperText}) => {
+   // Fixing nullish props
    id = id ?? label;
    type = type || "text";
+
+   const [selected, setSelected] = useState(false);
+
+   const handleFocus = () => setSelected(true);
+   const handleBlur = () => setSelected(false);
+
+   const classes = [];
+
+   if (error) classes.push('error');
+   if (selected) classes.push('selected');
+
    return (
       <>
-         <label htmlFor={id}>{label}</label>
+         <label className={error ? 'error--text' : selected ? 'selected--text' : ''} htmlFor={id}>{label}</label>
          {
             type === "textarea"
-            ? <textarea rows={rows || 1}></textarea>
-            : <input id={id} type={type}  />
+            ? <textarea className={classes.join(' ')} rows={rows || 1} onFocus={handleFocus} onBlur={handleBlur}></textarea>
+            : <input className={classes.join(' ')} id={id} type={type} onFocus={handleFocus} onBlur={handleBlur} />
          }
+         <span className={error ? 'error--text' : ''}>{helperText}</span>
       </>
    )
 }
