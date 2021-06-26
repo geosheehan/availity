@@ -40,9 +40,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const {submit, ...others} = errors;
-    // Wait for this error to be set before continuing, otherwise additional submit clicks will be required.
-    await setErrors(others);
+    delete errors.submit;
     if (Object.keys(errors).length) return setErrors({...errors, submit: 'Please handle all form errors and submit again.'});
 
     // Normally this would be where I invoke my api to create a new user and store this data in the database.
