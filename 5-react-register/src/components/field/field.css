@@ -14,6 +14,10 @@ input {
 	border-radius: 4px;
 }
 
+label {
+	margin-bottom: 2px;
+}
+
 textarea.error,
 input.error {
 	outline: 1px solid red;

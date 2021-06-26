@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import './field.css';
 
-const Field = ({label, type, id, rows, error, helperText}) => {
+const Field = ({label, type, id, rows, required, error, helperText}) => {
    // Fixing nullish props
    id = id ?? label;
    type = type || "text";
@@ -19,7 +19,14 @@ const Field = ({label, type, id, rows, error, helperText}) => {
 
    return (
       <>
-         <label className={error ? 'error--text' : selected ? 'selected--text' : ''} htmlFor={id}>{label}</label>
+         <label
+            className={error ? 'error--text' : selected ? 'selected--text' : ''}
+            htmlFor={id}
+         >
+            {required && <span className='error--text'>*</span>}
+            {' '}
+            {label}
+         </label>
          {
             type === "textarea"
             ? <textarea className={classes.join(' ')} rows={rows || 1} onFocus={handleFocus} onBlur={handleBlur}></textarea>
