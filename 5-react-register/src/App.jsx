@@ -36,12 +36,15 @@ function App() {
 
   const [showSubmit, setShowSubmit] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const {submit, ...others} = errors;
+    await setErrors(others);
     if (Object.keys(errors).length) return setErrors({...errors, submit: 'Please handle all form errors and submit again.'});
 
-    // Send this object to the backend for storage
+    // Normally this would be where I invoke my api to create a new user and store this data in the database.
+    // However, for this demo, enjoy a nice table view in the console.
     console.table({
       first: name.first,
       last: name.last,
@@ -127,7 +130,8 @@ function App() {
           helperText={errors.first || ''}
           onBlur={(e) => validateFilled(e, 'first', 'First Name')}
           onChange={(e) => {
-            delete errors.first;
+            const {first, ...others} = errors;
+            setErrors(others);
             setName({...name, first: e.target.value});
           }}
         />
@@ -139,7 +143,8 @@ function App() {
           helperText={errors.last || ''}
           onBlur={(e) => validateFilled(e, 'last', 'Last Name')}
           onChange={(e) => {
-            delete errors.last
+            const {last, ...others} = errors;
+            setErrors(others);
             setName({...name, last: e.target.value});
           }}
         />
@@ -152,7 +157,8 @@ function App() {
           helperText={errors.phone || ''}
           onBlur={(e) => validatePhoneNumber(e, 'phone')}
           onChange={(e) => {
-            delete errors.phone
+            const {phone, ...others} = errors;
+            setErrors(others);
             setContact({...contact, phone: e.target.value});
           }}
         />
@@ -165,7 +171,8 @@ function App() {
           helperText={errors.email || ''}
           onBlur={(e) => validateEmail(e, 'email')}
           onChange={(e) => {
-            delete errors.email
+            const {email, ...others} = errors;
+            setErrors(others);
             setContact({...contact, email: e.target.value});
           }}
         />
@@ -176,7 +183,8 @@ function App() {
           helperText={errors.npi || ''}
           onBlur={(e) => validateNPI(e, 'npi')}
           onChange={(e) => {
-            delete errors.npi;
+            const {npi, ...others} = errors;
+            setErrors(others);
             setNPI(e.target.value);
           }}
 
@@ -190,7 +198,8 @@ function App() {
           helperText={errors.street || ''}
           onBlur={(e) => validateFilled(e, 'street', 'Street Address')}
           onChange={(e) => {
-            delete errors.street
+            const {street, ...others} = errors;
+            setErrors(others);
             setAddress({...address, street: e.target.value})
           }}
         />
@@ -206,7 +215,8 @@ function App() {
           helperText={errors.city || ''}
           onBlur={(e) => validateFilled(e, 'city', 'City')}
           onChange={(e) => {
-            delete errors.city
+            const {city, ...others} = errors;
+            setErrors(others);
             setAddress({...address, city: e.target.value})
           }}
         />
@@ -216,7 +226,8 @@ function App() {
           helperText={errors.state || ''}
           onBlur={(e) => validateFilled(e, 'state', 'State')}
           onChange={(e) => {
-            delete errors.state
+            const {state, ...others} = errors;
+            setErrors(others);
             setAddress({...address, state: e.target.value})
           }}
         />
@@ -228,7 +239,8 @@ function App() {
           helperText={errors.zip || ''}
           onBlur={(e) => validateZipCode(e, 'zip')}
           onChange={(e) => {
-            delete errors.zip
+            const {zip, ...others} = errors;
+            setErrors(others);
             setAddress({...address, zip: e.target.value})
           }}
         />
