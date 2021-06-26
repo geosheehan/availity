@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import './field.css';
 
-const Field = ({label, type, id, rows, required, error, helperText}) => {
+const Field = ({label, type, id, rows, required, error, helperText, onChange, onBlur}) => {
    // Fixing nullish props
    id = id ?? label;
    type = type || "text";
@@ -10,7 +10,10 @@ const Field = ({label, type, id, rows, required, error, helperText}) => {
    const [selected, setSelected] = useState(false);
 
    const handleFocus = () => setSelected(true);
-   const handleBlur = () => setSelected(false);
+   const handleBlur = (e) => {
+      onBlur && onBlur(e);
+      setSelected(false);
+   };
 
    const classes = [];
 
@@ -29,8 +32,22 @@ const Field = ({label, type, id, rows, required, error, helperText}) => {
          </label>
          {
             type === "textarea"
-            ? <textarea className={classes.join(' ')} rows={rows || 1} onFocus={handleFocus} onBlur={handleBlur}></textarea>
-            : <input className={classes.join(' ')} id={id} type={type} onFocus={handleFocus} onBlur={handleBlur} />
+            ? <textarea
+                  id={id}
+                  className={classes.join(' ')}
+                  rows={rows || 1}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  onChange={onChange}
+               ></textarea>
+            : <input
+                  id={id}
+                  className={classes.join(' ')}
+                  type={type}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  onChange={onChange}
+               />
          }
          <span className={error ? 'error--text' : ''}>{helperText}</span>
       </>
