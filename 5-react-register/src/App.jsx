@@ -34,12 +34,28 @@ function App() {
     // zip: '',
   })
 
+  const [showSubmit, setShowSubmit] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (Object.keys(errors)) return;
+    if (Object.keys(errors).length) return setErrors({...errors, submit: 'Please handle all form errors and submit again.'});
+
+    // Send this object to the backend for storage
+    console.table({
+      first: name.first,
+      last: name.last,
+      phone: contact.phone,
+      email: contact.email,
+      npi,
+      street: address.street,
+      extended: address.extended,
+      state: address.state,
+      zip: address.zip,
+    })
 
     // Redirect to login, dashboard, homepage, etc.
+    setShowSubmit(true);
 
   }
 
@@ -184,6 +200,7 @@ function App() {
         />
 
         <button type="submit" col={4}>Sign Up</button>
+        <span className={errors.submit ? 'error--text' : showSubmit ? '' : 'hide'} col={8}>{errors.submit || 'Check console to see submitted data.'}</span>
       </Form>
     </Container>
   );
