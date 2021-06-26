@@ -9,15 +9,15 @@ import './App.css';
 function App() {
   // Form states to validate
   const [name, setName] = useState({first: '', last: ''});
-  const [contact, setContact] = useState({phone: null, email: ''});
-  const [npi, setNPI] = useState(null);
+  const [contact, setContact] = useState({phone: '', email: ''});
+  const [npi, setNPI] = useState('');
 
   const [address, setAddress] = useState({
     street: '',
     extended: '',
     city: '',
     state: '',
-    zip: null
+    zip: ''
   })
 
   const [errors, setErrors] = useState({
@@ -70,6 +70,11 @@ function App() {
     validatePattern(e, key, 'Telephone Number', /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/);
   }
 
+  const validateEmail = (e, key) => {
+    // Very minimal, very rough, email validation.
+    validatePattern(e, key, 'Email Address', /^\S+@\S+$/);
+  }
+
   return (
     <Container component="main">
       <Form onSubmit={handleSubmit}>
@@ -111,7 +116,20 @@ function App() {
             setContact({...contact, phone: e.target.value});
           }}
         />
-        <Field label="Email Address" required type="email" col={8}/>
+        <Field
+          label="Email Address"
+          required
+          type="email"
+          col={8}
+          error={Boolean(errors.email)}
+          helperText={errors.email || ''}
+          onBlur={(e) => validateEmail(e, 'email')}
+          onChange={(e) => {
+            delete errors.email
+            setContact({...contact, email: e.target.value});
+          }}
+
+        />
         <Field label="NPI Number" required />
 
         <h3>Business Address</h3>
@@ -126,7 +144,10 @@ function App() {
             setAddress({...address, street: e.target.value})
           }}
         />
-        <Field label="Apartment, building, floor (optional)" />
+        <Field
+          label="Apartment, building, floor (optional)"
+          onChange={(e) => setAddress({...address, extended: e.target.value})}
+        />
         <Field
           label="City"
           required
