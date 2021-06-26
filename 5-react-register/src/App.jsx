@@ -68,27 +68,51 @@ function App() {
     }
     return true;
   }
-
   const validatePattern = (e, key, field, pattern) => {
 
     if (!validateFilled(e, key, field)) return false;
 
     if (!pattern.test(e.target.value)) {
       setErrors({...errors, [key]: `Invalid ${field}`})
+      return false;
     }
+
+    return true;
   }
 
   const validateZipCode = (e, key) => {
     validatePattern(e, key, 'Zip Code', /^\d{5}(?:[-\s]\d{4})?$/);
   }
-
   const validatePhoneNumber = (e, key) => {
     validatePattern(e, key, 'Telephone Number', /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/);
   }
-
   const validateEmail = (e, key) => {
     // Very minimal, very rough, email validation.
     validatePattern(e, key, 'Email Address', /^\S+@\S+$/);
+  }
+  const validateNPI = (e, key) => {
+    if (!validatePattern(e, key, 'NPI', /^(?:80840)?\d{10}$/)) return false;
+
+    // Luhn NPI validation method
+    // Formula from: https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf
+    const check = parseInt(e.target.value.slice(-1));
+    let sum = e.target.value
+      .slice(-10, -1)
+      .split('')
+      .reduce((sum, d, index) => {
+        let digit = parseInt(d);
+        if (index % 2 === 0) digit *= 2;
+
+        if (digit > 9) digit = ~~(digit / 10) + digit % 10;
+        return sum + digit;
+      }, 24); // 24 is constant value using this algorithm for the 80840 prefix
+
+    // Confirming with check digit
+    if (check !== 10 - (sum % 10)) {
+      setErrors({...errors, npi: 'Failed NPI validator. Verify your number.'});
+      return false;
+    }
+    return true;
   }
 
   return (
@@ -144,9 +168,19 @@ function App() {
             delete errors.email
             setContact({...contact, email: e.target.value});
           }}
+        />
+        <Field
+          label="NPI Number"
+          required
+          error={Boolean(errors.npi)}
+          helperText={errors.npi || ''}
+          onBlur={(e) => validateNPI(e, 'npi')}
+          onChange={(e) => {
+            delete errors.npi;
+            setNPI(e.target.value);
+          }}
 
         />
-        <Field label="NPI Number" required />
 
         <h3>Business Address</h3>
         <Field
