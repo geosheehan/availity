@@ -12,7 +12,7 @@ function parseFiles(files) {
 	for (const file of files) {
 		const contents = fs.readFileSync(`${input}${file}`, 'utf8');
 
-		contents.split('\r\n').forEach((line, index) => {
+		contents.split('\r\n').forEach((line) => {
 			if (!line.length) return;
 
 			const [id, first, last, version, company] = line.split(',');
@@ -41,7 +41,6 @@ function writeFiles(parsed) {
 		for (const id in parsed[company]) {
 			sorted.push({
 				id,
-				company, // TODO: This will be removed later
 				...parsed[company][id],
 			});
 		}
