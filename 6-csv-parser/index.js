@@ -44,6 +44,7 @@ async function readData(files) {
             }
          }
 
+         rl.close();
       }
 
       return data;
@@ -53,16 +54,17 @@ async function readData(files) {
 }
 
 async function writeData(data) {
-   const sortedData = {}
    for (let company in data) {
-      sortedData[company] = [];
+      const sortedData = []
+
       for (let id in data[company]) {
-         sortedData[company].push({
+         sortedData.push({
             id,
             ...data[company][id]
          });
       }
-      sortedData[company].sort((a, b) => {
+
+      sortedData.sort((a, b) => {
          // sort by last name
          if (a.last < b.last) return -1;
          if (b.last < a.last) return 1;
@@ -72,6 +74,10 @@ async function writeData(data) {
          return 0;
       });
 
+      const writer = fs.createWriteStream(`${output}${company}.csv`, {flags: 'a'});
+      for (let line of sortedData) {
+         const lineData = Object.values(line);
+         writer.write(`${lineData.join(',')}\r\n`);
+      }
    }
-   console.log(sortedData);
 }
