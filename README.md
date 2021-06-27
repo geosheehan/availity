@@ -20,3 +20,26 @@ Availity makes websites that hospitals and doctors can access to talk with insur
 
 Written in JavaScript. Can be found in the `4-LISP-checker` directory.
 I faced few issues while completing this challenge. My original solution did not take nesting into account, and had to be altered to fix this. However, very little was needed to implement this change.
+
+#### 5. Healthcare providers request to be part of the Availity system. Using a modern JavaScript framework (React preferred, or Vue or Angular), create a registration user interface so healthcare providers can electronically join Availity. The following data points should be collected:
+
+-  First Name
+-  Last Name
+-  NPI number
+-  Business Address
+-  Telephone Number
+-  Email address
+
+##### Notes
+
+Written in React. Can be found in the `5-react-register` directory.
+This challenge took me the longest to complete, but was also the most fun. I decided to forego Material UI, which is my goto for stylized components, and build all styled and functional components from scratch using JSX and CSS.
+When I got to a point that I was happy with the design of the page, I started to add in some basic validation that triggers as soon as a field loses focus. If there is a problem detected with the entered data, then the user is alerted to the problem and has a chance to fix it before submitting the form.
+On submit, if there are still problems with the entered data, then a message displays near the submit button and the submit is cancelled. If everything is in order, then a table is printed to the console containing the data that would have been sent to the backend.
+
+##### Optimizations
+
+There are a few changes I would have made to this form if I had more time.
+The first change would be to add a sanity validation check to make sure that there are no empty fields. Currently, if no fields are ever focused, and the user submits, then empty data is sent to the server.
+Secondly, I would split up the registration form into two steps. The first would be to collect personal information as well as the NPI number. The second step would be to collect the address information. This change is debatable, but the main reason would be to add a little extra UX into the design.
+I would also change the way address information is gathered. Currently the user has to manually enter all of their address information and I would change to make it a little easier to use. At the very least, change the State field to a dropdown menu with options available.
