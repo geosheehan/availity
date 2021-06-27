@@ -55,9 +55,9 @@ I would also change the way address information is gathered. Currently the user 
 ##### Notes
 
 Written in JavaScript. Can be found in the `6-csv-parser` directory.
-This challenge probably the one I had to do the most Google-ing. I've done file I/O before, but mostly during my time at university and always in C++. I knew the main concepts and had pseudo code ready. The parts I needed help with the most was finding the NodeJS equivilents of `std::ifstream` and `std::ofstream`.
+This challenge probably the one I had to do the most Google-ing. I've done file I/O before, but mostly during my time at university and always in C++. I knew the main concepts and had pseudo code ready. The parts I needed help with the most was finding the NodeJS equivalents of `std::ifstream` and `std::ofstream`.
 The other challenge was coming up with datasets that sufficiently tested my code.
 
 ##### Optimizations
 
-I'm not the biggest fan of how I internally structured the data from the input files. I'd like to take some time to really look over the alogrithm and see if there is a better way to organize the data so there are less conversions needed between reading, sorting, and writing the data.
+I'm not the biggest fan of how I internally structured the data from the input files. I'd like to take some time to really look over the algorithm and see if there is a better way to organize the data so there are less conversions needed between reading, sorting, and writing the data.
