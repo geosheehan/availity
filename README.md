@@ -11,3 +11,12 @@ In my first personal project, I worked with a group of my friends to develop an 
 #### 3. How would you explain what Availity does to your grandmother?
 
 Availity makes websites that hospitals and doctors can access to talk with insurance companies about patients' coverage, and to collect money from the insurance companies for covered patient care.
+
+## Coding Challenges
+
+#### 4. You are tasked to write a checker that validates the parentheses of a LISP code. Write a program (in Java or JavaScript) which takes in a string as an input and returns true if all the parentheses in the string are properly closed and nested.
+
+##### Notes
+
+Written in JavaScript. Can be found in the `4-LISP-checker` directory.
+I faced few issues while completing this challenge. My original solution did not take nesting into account, and had to be altered to fix this. However, very little was needed to implement this change.
