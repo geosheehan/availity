@@ -13,9 +13,13 @@ Here are a few links to the project
 
 #### 2. Tell me about something you have read recently that you would recommend and why. (Can be a Github Repo, Article, Blog, Book, etc
 
+It is not in a written medium, however, I would recommend the video "An Introvert's Guide to Networking" by Rick Turoczy on the TEDx Talks Youtube channel. This video had a significant impact on my definition of professional networking. It changed my strategy and goals when meeting new people and gave me a brighter outlook on networking in general. I am now consciously looking for ways to "connect the dots" to improve not only my networking experience, but the experience of those in my network as well.
+
+The video can be found on Youtube [here](https://www.youtube.com/watch?v=Cj98mr_wUA0)
+
 #### 3. How would you explain what Availity does to your grandmother?
 
-Availity makes websites that hospitals and doctors can access to talk with insurance companies about patients' coverage. They can also collect money from the insurance companies for covered patient care.
+Availity makes websites that hospitals and doctors can access to communicate with insurance companies about patients' coverage. They can also collect money from the insurance companies for covered patient care.
 
 ## Coding Challenges
 
