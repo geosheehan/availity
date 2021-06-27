@@ -43,3 +43,21 @@ There are a few changes I would have made to this form if I had more time.
 The first change would be to add a sanity validation check to make sure that there are no empty fields. Currently, if no fields are ever focused, and the user submits, then empty data is sent to the server.
 Secondly, I would split up the registration form into two steps. The first would be to collect personal information as well as the NPI number. The second step would be to collect the address information. This change is debatable, but the main reason would be to add a little extra UX into the design.
 I would also change the way address information is gathered. Currently the user has to manually enter all of their address information and I would change to make it a little easier to use. At the very least, change the State field to a dropdown menu with options available.
+
+#### 6. Availity receives enrollment files from various benefits management and enrollment solutions (I.e. HR platforms, payroll platforms). Most of these files are typically in EDI format. However, there are some files in CSV format. For the files in CSV format, write a program that will read the content of the file and separate enrollees by insurance company in its own file. Additionally, sort the contents of each file by last and first name (ascending). Lastly, if there are duplicate User Ids for the same Insurance Company, then only the record with the highest version should be included. The following data points are included in the file:
+
+-  User Id (string)
+-  First Name (string)
+-  Last Name (string)
+-  Version (integer)
+-  Insurance Company (string)
+
+##### Notes
+
+Written in JavaScript. Can be found in the `6-csv-parser` directory.
+This challenge probably the one I had to do the most Google-ing. I've done file I/O before, but mostly during my time at university and always in C++. I knew the main concepts and had pseudo code ready. The parts I needed help with the most was finding the NodeJS equivilents of `std::ifstream` and `std::ofstream`.
+The other challenge was coming up with datasets that sufficiently tested my code.
+
+##### Optimizations
+
+I'm not the biggest fan of how I internally structured the data from the input files. I'd like to take some time to really look over the alogrithm and see if there is a better way to organize the data so there are less conversions needed between reading, sorting, and writing the data.
