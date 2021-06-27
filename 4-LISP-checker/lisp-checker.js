@@ -6,19 +6,19 @@ let assert = require('assert');
  * @return {boolean} true if all parentheses are properly closed and nested, otherwise false
  */
 function checkParentheses(lispStr) {
-   let count = 0;
-   for (let c of lispStr) {
-      if (c === '(') count++;
-      else if (c === ')') count--;
+	let count = 0;
+	for (let c of lispStr) {
+		if (c === '(') count++;
+		else if (c === ')') count--;
 
-      // Bad nesting
-      // The first time we hit a close while having no opens, then return false
-      if (count < 0) return false;
-   }
-   // Making it here means nesting is fine, now to check the count
+		// Bad nesting
+		// The first time we hit a close while having no opens, then return false
+		if (count < 0) return false;
+	}
+	// Making it here means nesting is fine, now to check the count
 
-   // If the count is 0, then there are exactly equal ( and )
-   return count === 0;
+	// If the count is 0, then there are exactly equal ( and )
+	return count === 0;
 }
 
 /**

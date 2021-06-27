@@ -7,77 +7,79 @@ const output = './output/';
 fs.readdir(input, handleFiles);
 
 async function handleFiles(err, files) {
-   if (err) {
-      return console.log(err);
-   }
-   const data = await readData(files);
-   writeData(data);
+	if (err) {
+		return console.log(err);
+	}
+	const data = await readData(files);
+	writeData(data);
 }
 
 async function readData(files) {
-   // Loop through the files found in the input directory
-   const readFiles = async () => {
-      const data = {};
+	// Loop through the files found in the input directory
+	const readFiles = async () => {
+		const data = {};
 
-      for (let file of files) {
-         if (!file.endsWith('.csv')) return; // ignore non csv files
+		for (let file of files) {
+			if (!file.endsWith('.csv')) return; // ignore non csv files
 
-         // Open a file stream
-         const fileStream = fs.createReadStream(`${input}${file}`);
-         const rl = readline.createInterface({
-            input: fileStream,
-            crlfDelay: Infinity, // Ignores empty lines
-         });
+			// Open a file stream
+			const fileStream = fs.createReadStream(`${input}${file}`);
+			const rl = readline.createInterface({
+				input: fileStream,
+				crlfDelay: Infinity, // Ignores empty lines
+			});
 
-         // Read the file line by line
-         for await (const line of rl) {
-            const [id, first, last, version, company] = line.split(',');
+			// Read the file line by line
+			for await (const line of rl) {
+				const [id, first, last, version, company] = line.split(',');
 
-            if (!(company in data)) data[company] = {};
+				if (!(company in data)) data[company] = {};
 
-            if (!(id in data[company]) || (data[company][id].version < version)) {
-               data[company][id] = {
-                  first,
-                  last,
-                  version: parseInt(version),
-               }
-            }
-         }
+				if (!(id in data[company]) || data[company][id].version < version) {
+					data[company][id] = {
+						first,
+						last,
+						version: parseInt(version),
+					};
+				}
+			}
 
-         rl.close();
-      }
+			rl.close();
+		}
 
-      return data;
-   }
+		return data;
+	};
 
-   return await readFiles();
+	return await readFiles();
 }
 
 async function writeData(data) {
-   for (let company in data) {
-      const sortedData = []
+	for (let company in data) {
+		const sortedData = [];
 
-      for (let id in data[company]) {
-         sortedData.push({
-            id,
-            ...data[company][id]
-         });
-      }
+		for (let id in data[company]) {
+			sortedData.push({
+				id,
+				...data[company][id],
+			});
+		}
 
-      sortedData.sort((a, b) => {
-         // sort by last name
-         if (a.last < b.last) return -1;
-         if (b.last < a.last) return 1;
-         // then by first name
-         if (a.first < b.first) return -1;
-         if (b.first < a.first) return 1;
-         return 0;
-      });
+		sortedData.sort((a, b) => {
+			// sort by last name
+			if (a.last < b.last) return -1;
+			if (b.last < a.last) return 1;
+			// then by first name
+			if (a.first < b.first) return -1;
+			if (b.first < a.first) return 1;
+			return 0;
+		});
 
-      const writer = fs.createWriteStream(`${output}${company}.csv`, {flags: 'a'});
-      for (let line of sortedData) {
-         const lineData = Object.values(line);
-         writer.write(`${lineData.join(',')}\r\n`);
-      }
-   }
+		const writer = fs.createWriteStream(`${output}${company}.csv`, {
+			flags: 'a',
+		});
+		for (let line of sortedData) {
+			const lineData = Object.values(line);
+			writer.write(`${lineData.join(',')}\r\n`);
+		}
+	}
 }
