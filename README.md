@@ -1,5 +1,13 @@
 # Availity’s Fullstack Homework Assignment
 
+This is the technical assessment I was asked to complete for the company Availity.
+It was broken up into 2 sections, with 3 questions each.
+3 written response and 3 coding challenges.
+
+Below is my thoughts and answers to each of the questions.
+
+In the interview directory is the live coding I was asked to do.
+
 ## Written Responses
 
 #### 1. Tell me about your proudest professional achievement. It can also be a personal or school project.
